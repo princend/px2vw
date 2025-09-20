@@ -1,5 +1,5 @@
 {
-  "name": "px2vw",
+  "name": "px2vw-tool",
   "displayName": "px2vw",
   "description": "css px to vw",
   "version": "0.0.1",
@@ -18,10 +18,6 @@
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "px2vw.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "px2vw.convert",
         "title": "px2vw: 轉換自訂設計稿寬度 px 為 vw"
