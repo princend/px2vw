@@ -4,19 +4,22 @@ import * as vscode from 'vscode';
 let isEditing = false;
 
 // 中間態友善的偵測正則：允許輸入過程，但只在完整 'px' 時提示
-// 例： 1920.160px -> designWidth=1920, px=160, tail='px'
-const DETECT_REGEX = /(\d+)\.(\d+(?:\.\d+)?)(p?x?)/g;
+// 例： 192t160px -> designWidth=1920, px=160, tail='px'
+// 修改中間態偵測正則：允許中間為 t，完整為 'px' 結尾
+const DETECT_REGEX = /(\d+)t(\d+(?:\.\d+)?)(p?x?)/g;
 
-// 僅從完整 token 轉換：必須是 'px' 結尾
-const FULL_TOKEN_REGEX = /(\d+)\.(\d+(?:\.\d+)?)px/g;
+// 僅從完整 token 轉換：必須是 'px' 結尾，並用 t 作分隔符
+const FULL_TOKEN_REGEX = /(\d+)t(\d+(?:\.\d+)?)px/g;
 
 // 單純 px 轉換（當使用者只選到 '160px' 時，使用設定中的設計寬度 px2vw.designWidth）
 const SIMPLE_PX_REGEX = /(\d+(?:\.\d+)?)px/g;
 
 function toVw(px: number, designWidth: number, decimals: number) {
   const vw = (px / designWidth) * 100;
-  return `${vw.toFixed(decimals)}vw`;
+  const fixed = vw.toFixed(decimals);
+  return fixed.replace(/\.?0+$/, '') + 'vw';
 }
+
 
 function convertWithInlineDesignWidth(text: string, decimals: number): string {
   return text.replace(FULL_TOKEN_REGEX, (_m, designWidthStr: string, pxStr: string) => {
