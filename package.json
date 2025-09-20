@@ -3,22 +3,73 @@
   "displayName": "px2vw",
   "description": "css px to vw",
   "version": "0.0.1",
+  "publisher": "your-name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://example.com/your-repo.git"
+  },
   "engines": {
     "vscode": "^1.104.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "px2vw.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "px2vw.convert",
+        "title": "px2vw: 轉換自訂設計稿寬度 px 為 vw"
       }
-    ]
+    ],
+    "keybindings": [
+      {
+        "command": "px2vw.convert",
+        "key": "ctrl+alt+v",
+        "when": "editorTextFocus && !inputFocus"
+      },
+      {
+        "command": "px2vw.convert",
+        "key": "cmd+alt+v",
+        "when": "editorTextFocus && !inputFocus",
+        "mac": "cmd+alt+v"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "px2vw",
+      "properties": {
+        "px2vw.designWidth": {
+          "type": "number",
+          "default": 1920,
+          "minimum": 1,
+          "description": "預設設計稿寬度（當只選取純 px，如 160px 時會使用此寬度換算）。"
+        },
+        "px2vw.decimals": {
+          "type": "number",
+          "default": 3,
+          "minimum": 0,
+          "maximum": 6,
+          "description": "小數位數。"
+        },
+        "px2vw.enableTypingDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "輸入完整 <設計寬度>.<px>px（如 1920.160px）時顯示 QuickPick 提示轉換。"
+        }
+      }
+    }
   },
+  "activationEvents": [
+    "onCommand:px2vw.convert",
+    "onCommand:px2vw.helloWorld",
+    "onStartupFinished"
+  ],
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
