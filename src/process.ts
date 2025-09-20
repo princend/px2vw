@@ -1,7 +1,7 @@
 export default class Process {
-    constructor(private config: any) { }
-    private regPx: RegExp = /([-]?[\d.]+)p(x)?/;
-    private regPxAll: RegExp = /([-]?[\d.]+)px/g;
+    constructor(public config: any) { }
+    protected regPx: RegExp = /([-]?[\d.]+)p(x)?/;
+    protected regPxAll: RegExp = /([-]?[\d.]+)px/g;
 
     convert(text: string) {
         let match = text.match(this.regPx)
@@ -18,7 +18,7 @@ export default class Process {
         });
     }
 
-    private px2vw(text: string) {
+    protected px2vw(text: string, ..._params:any[]) {
         const pxValue = parseFloat(text);
 
         let vw: string = +(pxValue / this.config.designWidth * 100).toFixed(this.config.decimals) + 'vw';

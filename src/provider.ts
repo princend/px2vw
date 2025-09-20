@@ -2,7 +2,7 @@ import * as vscode from 'vscode'
 import process from './process'
 
 export default class Provider implements vscode.CompletionItemProvider {
-    constructor(private process: process) { }
+    constructor(public process: process) { }
 
     provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Thenable<vscode.CompletionItem[]> {
         return new Promise((resolve, reject) => {
