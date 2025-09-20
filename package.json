@@ -62,8 +62,15 @@
       }
     }
   },
-  "activationEvents": [   
-    "onStartupFinished"
+  "activationEvents": [
+    "onStartupFinished",
+    "onLanguage:html",
+    "onLanguage:vue",
+    "onLanguage:css",
+    "onLanguage:less",
+    "onLanguage:scss",
+    "onLanguage:sass",
+    "onLanguage:stylus"
   ],
   "scripts": {
     "vscode:prepublish": "npm run package",

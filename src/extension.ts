@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import provider from './provider';
+import process from './process';
 
 // 迴圈防護，避免 onDidChangeTextDocument 內部替換又觸發自身造成回流
 let isEditing = false;
@@ -96,7 +98,7 @@ export function activate(context: vscode.ExtensionContext) {
     const editor = vscode.window.activeTextEditor;
     if (!editor || event.document !== editor.document) return;
     if (isEditing) return;
-    
+
     const lang = editor.document.languageId;
     if (!['css', 'scss', 'sass', 'less'].includes(lang)) return;
 
@@ -143,6 +145,36 @@ export function activate(context: vscode.ExtensionContext) {
     // 預留：如需同步設定或重置狀態可在此處理
   });
   context.subscriptions.push(activeEditorDisposable);
+  const cfg = vscode.workspace.getConfiguration('px2vw');
+
+   const Process = new process(cfg);
+    const Provider = new provider(Process);
+    const LANS = ['html', 'css', 'less', 'scss', 'sass', 'stylus'];
+
+    for (let lan of LANS) {
+        let providerDisposable = vscode.languages.registerCompletionItemProvider(lan, Provider);
+        context.subscriptions.push(providerDisposable);
+    }
+
+    let disposable = vscode.commands.registerTextEditorCommand('extension.px2vw', function (textEditor, edit) {
+        const doc = textEditor.document;
+        let selection: vscode.Selection | vscode.Range = textEditor.selection;
+
+        if (selection.isEmpty) {
+            const start = new vscode.Position(0, 0);
+            const end = new vscode.Position(doc.lineCount - 1, doc.lineAt(doc.lineCount - 1).text.length);
+            selection = new vscode.Range(start, end);
+        }
+
+        let text = doc.getText(selection);
+
+        textEditor.edit(builder => {
+            builder.replace(selection, Process.convertAll(text))
+        });
+    })
+
+    context.subscriptions.push(disposable);
+
 }
 
 export function deactivate() { }
