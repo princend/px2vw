@@ -1,8 +1,8 @@
 {
   "name": "px2vw-tool",
   "displayName": "px2vw-tool",
-  "description": "1.將選取範圍內的 px 單位轉換為 vw，支援自訂設計稿寬度。2.輸入1920t100px時顯示選單提示轉換成vw。",
-  "version": "0.0.1",
+  "description": "支援輸入格式為 `<設計寬度>t<px>px`，自動將 px 轉換為 vw 。例如：輸入 `1920t100px` 會轉成 `5.208vw`。",
+  "version": "0.0.3",
   "publisher": "Princend",
   "icon": "images/logo.png",
   "license": "MIT",
