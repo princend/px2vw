@@ -12,6 +12,6 @@ VS Code 擴充套件，提供 px 單位轉 vw 單位轉換功能，支援自訂�
 
 ## 使用方式
 
-安裝後，可使用 Ctrl+Alt+V（Mac 為 Cmd+Alt+V）快速轉換選取範圍內 px 單位。
+安裝後，可使用 Ctrl+Alt+P（Mac 為 Cmd+Alt+P）快速轉換選取範圍內 px 單位。
 
 並且在輸入完整的 `<設計寬度>t<px>px` 格式時，會自動提示是否轉換為 vw。

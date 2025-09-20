@@ -82,6 +82,8 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.window.showInformationMessage('請先開啟一個檔案');
       return;
     }
+
+    vscode.window.showInformationMessage('px2vw convert 命令觸發');
     await convertSelectionOrLine(editor);
   });
   context.subscriptions.push(convertCmd);
@@ -94,6 +96,9 @@ export function activate(context: vscode.ExtensionContext) {
     const editor = vscode.window.activeTextEditor;
     if (!editor || event.document !== editor.document) return;
     if (isEditing) return;
+    
+    const lang = editor.document.languageId;
+    if (!['css', 'scss', 'sass', 'less'].includes(lang)) return;
 
     for (const change of event.contentChanges) {
       const line = event.document.lineAt(change.range.start.line);
@@ -140,4 +145,4 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(activeEditorDisposable);
 }
 
-export function deactivate() {}
+export function deactivate() { }
