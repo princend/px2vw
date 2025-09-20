@@ -3,11 +3,11 @@
   "displayName": "px2vw",
   "description": "css px to vw",
   "version": "0.0.1",
-  "publisher": "your-name",
+  "publisher": "Princend",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://example.com/your-repo.git"
+    "url": "https://github.com/princend/px2vw.git"
   },
   "engines": {
     "vscode": "^1.104.0"
@@ -66,8 +66,7 @@
     }
   },
   "activationEvents": [
-    "onCommand:px2vw.convert",
-    "onCommand:px2vw.helloWorld",
+    "onCommand:px2vw.convert",   
     "onStartupFinished"
   ],
   "scripts": {
