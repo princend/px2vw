@@ -2,10 +2,15 @@
   "name": "px2vw-tool",
   "displayName": "px2vw-tool",
   "description": "支援輸入格式為 `<設計寬度>t<px>px`，自動將 px 轉換為 vw 。例如：輸入 `1920t100px` 會轉成 `5.208vw`。",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "Princend",
   "icon": "images/logo.png",
   "license": "MIT",
+  "keywords": [
+    "px2vw",
+    "px to vw",
+    "pxtovw"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/princend/px2vw.git"
